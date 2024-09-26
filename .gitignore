@@ -1,5 +1,5 @@
-#/autosave/req/
-#/autosave/save/
+/autosave/req/
+/autosave/save/
 /as/req/
 /as/save/
 .vscode/
