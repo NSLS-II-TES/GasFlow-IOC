@@ -1,0 +1,77 @@
+# asyn record for the underlying asyn octet port
+file "$(ASYN)/db/asynRecord.db" { pattern
+ { P		, R			, PORT		, ADDR	, IMAX	, OMAX	}
+ { "$(Sys)"	, "$(Dev)OctetAsyn"	, $(ASYNPORT)	, 0	, 80	, 80	}
+}
+
+# ##############################################################################
+# DOs in "DO mode" (default)
+# ##############################################################################
+
+file "$(MODBUS)/db/bo_bit.template" { pattern
+ { P		, R			, PORT			, OFFSET, ZNAM	, ONAM	}
+ { "$(Sys)"	, "$(Dev)DO:1-Cmd"	, $(ASYNPORT)_DO	, 0	, Low	, High	}
+ { "$(Sys)"	, "$(Dev)DO:2-Cmd"	, $(ASYNPORT)_DO	, 1	, Low	, High	}
+ { "$(Sys)"	, "$(Dev)DO:3-Cmd"	, $(ASYNPORT)_DO	, 2	, Low	, High	}
+ { "$(Sys)"	, "$(Dev)DO:4-Cmd"	, $(ASYNPORT)_DO	, 3	, Low	, High	}
+}
+ 
+file "$(MODBUS)/db/bi_bit.template" { pattern
+ { P		, R			, PORT			, OFFSET, ZNAM	, ONAM	, ZSV		, OSV		, SCAN		}
+ { "$(Sys)"	, "$(Dev)DO:1-Sts"	, $(ASYNPORT)_DO_RBV	, 0	, Low	, High	, NO_ALARM	,  NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DO:2-Sts"	, $(ASYNPORT)_DO_RBV	, 1	, Low	, High	, NO_ALARM	,  NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DO:3-Sts"	, $(ASYNPORT)_DO_RBV	, 2	, Low	, High	, NO_ALARM	,  NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DO:4-Sts"	, $(ASYNPORT)_DO_RBV	, 3	, Low	, High	, NO_ALARM	,  NO_ALARM	, "I/O Intr"	}
+}
+
+file "$(MODBUS)/db/statistics.template" { pattern
+ { P		, R		, PORT		, SCAN		}
+ { "$(Sys)"	, "$(Dev)DO_"	, $(ASYNPORT)_DO, "10 second"	}
+}
+
+file "$(MODBUS)/db/statistics.template" { pattern
+ { P		, R			, PORT			, SCAN		}
+ { "$(Sys)"	, "$(Dev)DO_RBV_"	, $(ASYNPORT)_DO_RBV	, "10 second"	}
+}
+
+file "$(MODBUS)/db/poll_delay.template" { pattern
+ { P		, R				, PORT			}
+ { "$(Sys)"	, "$(Dev)DO_RBV_PollDelay"	, $(ASYNPORT)_DO_RBV	}
+}
+
+# raw values
+file "$(MODBUS)/db/longin.template" { pattern
+{P,           R,        PORT,           OFFSET,   SCAN}
+{$(Sys), "$(Dev)AI:1Raw-I",    $(ASYNPORT)_AI,     0,       "I/O Intr"}
+{$(Sys), "$(Dev)AI:2Raw-I",    $(ASYNPORT)_AI,     1,       "I/O Intr"}
+{$(Sys), "$(Dev)AI:3Raw-I",    $(ASYNPORT)_AI,     2,       "I/O Intr"}
+{$(Sys), "$(Dev)AI:4Raw-I",    $(ASYNPORT)_AI,     3,       "I/O Intr"}
+}
+
+# 0-10 Volts mode (0-1)
+# 0 - 20 mA mode (2)
+# 4 - 20 mA BO mode (3)
+file "$(MODBUS)/db/ai.template" { pattern
+{P,           R,        PORT,       OFFSET, BITS, EGUL,  EGUF, PREC, SCAN}
+{$(Sys), "$(Dev)AI:1-I",  $(ASYNPORT)_AI, 0,      16,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AI:2-I",  $(ASYNPORT)_AI, 1,      16,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AI:3-I",  $(ASYNPORT)_AI, 2,      16,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AI:4-I",  $(ASYNPORT)_AI, 3,      16,   0.,    10.,  3,    "I/O Intr"}
+}
+
+file "$(MODBUS)/db/ai_average.template" { pattern
+{P,           R,        PORT,       OFFSET, BITS, EGUL,  EGUF, PREC, SCAN}
+{$(Sys), "$(Dev)AI:1Avg-I", $(ASYNPORT)_AI, 0,      16,   0.,    10.,  3,    "1 second"}
+{$(Sys), "$(Dev)AI:2Avg-I", $(ASYNPORT)_AI, 1,      16,   0.,    10.,  3,    "1 second"}
+{$(Sys), "$(Dev)AI:3Avg-I", $(ASYNPORT)_AI, 2,      16,   0.,    10.,  3,    "1 second"}
+{$(Sys), "$(Dev)AI:4Avg-I", $(ASYNPORT)_AI, 3,      16,   0.,    10.,  3,    "1 second"}
+}
+
+file "$(MODBUS)/db/statistics.template" { pattern
+{P,           R,          PORT,              SCAN}
+{$(Sys), "$(Dev)AI",     $(ASYNPORT)_AI,  "10 second"}
+}
+
+file "$(MODBUS)/db/poll_delay.template" { pattern
+{P,           R,               PORT}
+{$(Sys), "$(Dev)AI_PollDelay", $(ASYNPORT)_AI}

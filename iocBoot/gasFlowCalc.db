@@ -1,0 +1,48 @@
+record(calcout, "$(Sys)$(Dev)AO:$(Ch)-RB") {
+    field(DESC, "Gas flow in ml/min")
+    field(EGU, "ml/min")
+    field(INPA, "$(Sys)$(Dev)AO:$(Ch)Raw-RB")
+    field(CALC, "A*$(EGUF)/10")
+    field(OUT, "$(Sys)$(Dev)AO:$(Ch)-RB")
+}
+
+record(ai, "$(Sys)$(Dev)AO:$(Ch)Raw-RB") {
+    field(DESC, "Gas flow in V")
+    field(EGU, "V")
+    field(SCAN, ".1 second")
+    field(FLNK, "$(Sys)$(Dev)AO:$(Ch)-RB")
+    field(INP, "$(Sys)$(Dev)$(DevOut)-AO:$(ChOut)-RB")
+}
+
+record(ai, "$(Sys)$(Dev)AO:$(Ch)-SP") {
+    field(DESC, "Gas flow in ml/min")
+    field(EGU, "ml/min")
+    field(FLNK, "$(Sys)$(Dev)$(DevOut)-AO:$(ChOut)-SP:CALC")
+}
+
+record(calcout, "$(Sys)$(Dev)$(DevOut)-AO:$(ChOut)-SP:CALC") {
+    field(DESC, "Convert glow from ml/min to V")
+    field(EGU, "ml/min")
+    field(INPA, "$(Sys)$(Dev)AO:$(Ch)-SP")
+    field(CALC, "MAX(MIN(A*10/$(EGUF),10),0)")
+    field(OUT,  "$(Sys)$(Dev)$(DevOut)-AO:$(ChOut)-SP PP")
+}
+
+record(calcout, "$(Sys)$(Dev)AI:$(Ch)-I") {
+    field(DESC, "Gas flow in ml/min")
+    field(EGU, "ml/min")
+    field(INPA, "$(Sys)$(Dev)AI:$(Ch)Raw-I")
+    field(CALC, "A*$(EGUF)/10")
+    field(OUT, "$(Sys)$(Dev)AI:$(Ch)-I")
+}
+
+record(ai, "$(Sys)$(Dev)AI:$(Ch)Raw-I") {
+    field(DESC, "Gas flow in V")
+    field(EGU, "V")
+    field(SCAN, ".1 second")
+    field(FLNK, "$(Sys)$(Dev)AI:$(Ch)-I")
+    field(INP, "$(Sys)$(Dev)$(DevIn)-AI:$(Ch)-I")
+    #field(INP, "$(Sys)$(Dev)$(DevOut)-AO:$(ChOut)-RB")
+}
+
+

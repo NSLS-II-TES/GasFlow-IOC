@@ -1,0 +1,50 @@
+# raw values
+file "longin.template" { pattern
+{P,           R,        PORT,           OFFSET,   SCAN}
+{$(Sys), "$(Dev)AI:1Raw-I",    $(ASYNPORT)_AI,     0,       "I/O Intr"}
+{$(Sys), "$(Dev)AI:2Raw-I",    $(ASYNPORT)_AI,     1,       "I/O Intr"}
+{$(Sys), "$(Dev)AI:3Raw-I",    $(ASYNPORT)_AI,     2,       "I/O Intr"}
+{$(Sys), "$(Dev)AI:4Raw-I",    $(ASYNPORT)_AI,     3,       "I/O Intr"}
+{$(Sys), "$(Dev)AI:5Raw-I",    $(ASYNPORT)_AI,     4,       "I/O Intr"}
+{$(Sys), "$(Dev)AI:6Raw-I",    $(ASYNPORT)_AI,     5,       "I/O Intr"}
+{$(Sys), "$(Dev)AI:7Raw-I",    $(ASYNPORT)_AI,     6,       "I/O Intr"}
+{$(Sys), "$(Dev)AI:8Raw-I",    $(ASYNPORT)_AI,     7,       "I/O Intr"}
+}
+
+# 0-10 Volts mode (0-1)
+# 0 - 20 mA mode (2)
+# 4 - 20 mA BO mode (3)
+file "ai.template" { pattern
+{P,           R,        PORT,       OFFSET, BITS, EGUL,  EGUF, PREC, SCAN}
+{$(Sys), "$(Dev)AI:1-I",  $(ASYNPORT)_AI, 0,      16,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AI:2-I",  $(ASYNPORT)_AI, 1,      16,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AI:3-I",  $(ASYNPORT)_AI, 2,      16,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AI:4-I",  $(ASYNPORT)_AI, 3,      16,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AI:5-I",  $(ASYNPORT)_AI, 4,      16,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AI:6-I",  $(ASYNPORT)_AI, 5,      16,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AI:7-I",  $(ASYNPORT)_AI, 6,      16,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AI:8-I",  $(ASYNPORT)_AI, 7,      16,   0.,    10.,  3,    "I/O Intr"}
+}
+
+file "ai_average.template" { pattern
+{P,           R,        PORT,       OFFSET, BITS, EGUL,  EGUF, PREC, SCAN}
+{$(Sys), "$(Dev)AI:1Avg-I", $(ASYNPORT)_AI, 0,      16,   0.,    10.,  3,    "1 second"}
+{$(Sys), "$(Dev)AI:2Avg-I", $(ASYNPORT)_AI, 1,      16,   0.,    10.,  3,    "1 second"}
+{$(Sys), "$(Dev)AI:3Avg-I", $(ASYNPORT)_AI, 2,      16,   0.,    10.,  3,    "1 second"}
+{$(Sys), "$(Dev)AI:4Avg-I", $(ASYNPORT)_AI, 3,      16,   0.,    10.,  3,    "1 second"}
+{$(Sys), "$(Dev)AI:5Avg-I", $(ASYNPORT)_AI, 4,      16,   0.,    10.,  3,    "1 second"}
+{$(Sys), "$(Dev)AI:6Avg-I", $(ASYNPORT)_AI, 5,      16,   0.,    10.,  3,    "1 second"}
+{$(Sys), "$(Dev)AI:7Avg-I", $(ASYNPORT)_AI, 6,      16,   0.,    10.,  3,    "1 second"}
+{$(Sys), "$(Dev)AI:8Avg-I", $(ASYNPORT)_AI, 7,      16,   0.,    10.,  3,    "1 second"}
+}
+
+
+file "statistics.template" { pattern
+{P,           R,          PORT,              SCAN}
+{$(Sys), "$(Dev)AI",     $(ASYNPORT)_AI,  "10 second"}
+}
+
+file "poll_delay.template" { pattern
+{P,           R,               PORT}
+{$(Sys), "$(Dev)AI_PollDelay", $(ASYNPORT)_AI}
+

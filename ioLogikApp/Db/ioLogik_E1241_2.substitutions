@@ -1,0 +1,50 @@
+# ##############################################################################
+# ##############################################################################
+
+file "$(MODBUS)/db/longout.template" { pattern
+{P,           R,          PORT,          OFFSET}
+{$(Sys),    "$(Dev)AO:5Raw-SP",     $(ASYNPORT)_AO,     0}
+{$(Sys),    "$(Dev)AO:6Raw-SP",     $(ASYNPORT)_AO,     1}
+{$(Sys),    "$(Dev)AO:7Raw-SP",     $(ASYNPORT)_AO,     2}
+{$(Sys),    "$(Dev)AO:8Raw-SP",     $(ASYNPORT)_AO,     3}
+}
+
+## EGUL and EGUF : 0 - 10V, 0 - 20 mA, 4 - 20 mA
+file "$(MODBUS)/db/ao.template" { pattern
+{P,           R,        PORT,       OFFSET, BITS, EGUL,  EGUF, PREC}
+{$(Sys), "$(Dev)AO:5-SP",  $(ASYNPORT)_AO, 0,      12,   0.,    10.,  3}
+{$(Sys), "$(Dev)AO:6-SP",  $(ASYNPORT)_AO, 1,      12,   0.,    10.,  3}
+{$(Sys), "$(Dev)AO:7-SP",  $(ASYNPORT)_AO, 2,      12,   0.,    10.,  3}
+{$(Sys), "$(Dev)AO:8-SP",  $(ASYNPORT)_AO, 3,      12,   0.,    10.,  3}
+}
+
+file "$(MODBUS)/db/longin.template" { pattern
+{P,           R,        PORT,           OFFSET,   SCAN}
+{$(Sys), "$(Dev)AO:5Raw-RB",    $(ASYNPORT)_AO_RBV,     0,       "I/O Intr"}
+{$(Sys), "$(Dev)AO:6Raw-RB",    $(ASYNPORT)_AO_RBV,     1,       "I/O Intr"}
+{$(Sys), "$(Dev)AO:7Raw-RB",    $(ASYNPORT)_AO_RBV,     2,       "I/O Intr"}
+{$(Sys), "$(Dev)AO:8Raw-RB",    $(ASYNPORT)_AO_RBV,     3,       "I/O Intr"}
+}
+
+file "$(MODBUS)/db/ai.template" { pattern
+{P,           R,            PORT,           OFFSET, BITS, EGUL,  EGUF, PREC, SCAN}
+{$(Sys), "$(Dev)AO:5-RB",  $(ASYNPORT)_AO_RBV, 0,      12,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AO:6-RB",  $(ASYNPORT)_AO_RBV, 1,      12,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AO:7-RB",  $(ASYNPORT)_AO_RBV, 2,      12,   0.,    10.,  3,    "I/O Intr"}
+{$(Sys), "$(Dev)AO:8-RB",  $(ASYNPORT)_AO_RBV, 3,      12,   0.,    10.,  3,    "I/O Intr"}
+}
+
+file "$(MODBUS)/db/statistics.template" { pattern
+{P,           R,          PORT,              SCAN}
+{$(Sys), "$(Dev)AO-SP",   $(ASYNPORT)_AO,  "10 second"}
+}
+
+file "$(MODBUS)/db/statistics.template" { pattern
+{P,           R,          PORT,              SCAN}
+{$(Sys), "$(Dev)AO_RB",     $(ASYNPORT)_AO_RBV,  "10 second"}
+}
+
+file "$(MODBUS)/db/poll_delay.template" { pattern
+{P,           R,               PORT}
+{$(Sys), "$(Dev)AO_RB_PollDelay", $(ASYNPORT)_AO_RBV}
+}

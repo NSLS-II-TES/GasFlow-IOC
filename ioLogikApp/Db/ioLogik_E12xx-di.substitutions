@@ -1,0 +1,26 @@
+# ##############################################################################
+# DIs in "DI mode" (default: channel 0-7)
+# ##############################################################################
+
+file "$(MODBUS)/db/bi_bit.template" { pattern
+ { P		, R			, PORT		, OFFSET, ZNAM	, ONAM	, ZSV		, OSV		, SCAN		}
+ { "$(Sys)"	, "$(Dev)DI1-Sts"	, $(ASYNPORT)_DI, 0	, Low	, High	, NO_ALARM	, NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DI2-Sts"	, $(ASYNPORT)_DI, 1	, Low	, High	, NO_ALARM	, NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DI3-Sts"	, $(ASYNPORT)_DI, 2	, Low	, High	, NO_ALARM	, NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DI4-Sts"	, $(ASYNPORT)_DI, 3	, Low	, High	, NO_ALARM	, NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DI5-Sts"	, $(ASYNPORT)_DI, 4	, Low	, High	, NO_ALARM	, NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DI6-Sts"	, $(ASYNPORT)_DI, 5	, Low	, High	, NO_ALARM	, NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DI7-Sts"	, $(ASYNPORT)_DI, 6	, Low	, High	, NO_ALARM	, NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DI8-Sts"	, $(ASYNPORT)_DI, 7	, Low	, High	, NO_ALARM	, NO_ALARM	, "I/O Intr"	}
+}
+
+file "$(MODBUS)/db/statistics.template" { pattern
+ { P		, R		, PORT		, SCAN		}
+ { "$(Sys)"	, "$(Dev)DI_"	, $(ASYNPORT)_DI, "10 second"	}
+}
+
+file "$(MODBUS)/db/poll_delay.template" { pattern
+ { P		, R			, PORT			}
+ { "$(Sys)"	, "$(Dev)DI_PollDelay"	, $(ASYNPORT)_DI	}
+}
+

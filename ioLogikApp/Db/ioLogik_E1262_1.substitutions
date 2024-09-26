@@ -1,0 +1,51 @@
+# ##############################################################################
+# ##############################################################################
+
+# asyn record for the underlying asyn octet port
+file "$(ASYN)/db/asynRecord.db" { pattern
+{P	, R			, PORT		, ADDR	, IMAX	, OMAX	}
+{$(Sys)	, "$(Dev)OctetAsyn"	, $(ASYNPORT)	, 0	, 80	, 80	}
+}
+
+# ##############################################################################
+# ##############################################################################
+
+# raw values
+
+file "$(MODBUS)/db/longinInt32.template" { pattern
+{P,        R,                      PORT,                OFFSET,   DATA_TYPE,	SCAN}
+{$(Sys), "$(Dev)T:1Raw-I",    $(ASYNPORT)_TC,     0,       INT32_BE,	"I/O Intr"}
+{$(Sys), "$(Dev)T:2Raw-I",    $(ASYNPORT)_TC,     2,       INT32_BE,	"I/O Intr"}
+{$(Sys), "$(Dev)T:3Raw-I",    $(ASYNPORT)_TC,     4,       INT32_BE,	"I/O Intr"}
+{$(Sys), "$(Dev)T:4Raw-I",    $(ASYNPORT)_TC,     6,       INT32_BE,	"I/O Intr"}
+{$(Sys), "$(Dev)T:5Raw-I",    $(ASYNPORT)_TC,     8,       INT32_BE,	"I/O Intr"}
+{$(Sys), "$(Dev)T:6Raw-I",    $(ASYNPORT)_TC,     10,       INT32_BE,	"I/O Intr"}
+{$(Sys), "$(Dev)T:7Raw-I",    $(ASYNPORT)_TC,     12,       INT32_BE,	"I/O Intr"}
+{$(Sys), "$(Dev)T:8Raw-I",    $(ASYNPORT)_TC,     14,       INT32_BE,	"I/O Intr"}
+}
+
+# float values mode
+
+file "$(MODBUS)/db/ai.template" { pattern
+{P,        R,                        PORT,            OFFSET, BITS, EGUL,  EGUF, PREC, SCAN}
+{$(Sys), "$(Dev)T:1-I",  $(ASYNPORT)_TC, 0,      16,   0.,    6553.5,  1,    "I/O Intr"}
+{$(Sys), "$(Dev)T:2-I",  $(ASYNPORT)_TC, 2,      16,   0.,    6553.5,  1,    "I/O Intr"}
+{$(Sys), "$(Dev)T:3-I",  $(ASYNPORT)_TC, 4,      16,   0.,    6553.5,  1,    "I/O Intr"}
+{$(Sys), "$(Dev)T:4-I",  $(ASYNPORT)_TC, 6,      16,   0.,    6553.5,  1,    "I/O Intr"}
+{$(Sys), "$(Dev)T:5-I",  $(ASYNPORT)_TC, 8,      16,   0.,    6553.5,  1,    "I/O Intr"}
+{$(Sys), "$(Dev)T:6-I",  $(ASYNPORT)_TC, 10,      16,   0.,    6553.5,  1,    "I/O Intr"}
+{$(Sys), "$(Dev)T:7-I",  $(ASYNPORT)_TC, 12,      16,   0.,    6553.5,  1,    "I/O Intr"}
+{$(Sys), "$(Dev)T:8-I",  $(ASYNPORT)_TC, 14,      16,   0.,    6553.5,  1,    "I/O Intr"}
+}
+
+file "$(MODBUS)/db/ai_average.template" { pattern
+{P,        R,                        PORT,            OFFSET, BITS, EGUL,  EGUF, PREC, SCAN}
+{$(Sys), "$(Dev)T:1Avg-I", $(ASYNPORT)_TC, 0,      16,   0.,    6553.5,  1,    "1 second"}
+{$(Sys), "$(Dev)T:2Avg-I", $(ASYNPORT)_TC, 2,      16,   0.,    6553.5,  1,    "1 second"}
+{$(Sys), "$(Dev)T:3Avg-I", $(ASYNPORT)_TC, 4,      16,   0.,    6553.5,  1,    "1 second"}
+{$(Sys), "$(Dev)T:4Avg-I", $(ASYNPORT)_TC, 6,      16,   0.,    6553.5,  1,    "1 second"}
+{$(Sys), "$(Dev)T:5Avg-I", $(ASYNPORT)_TC, 8,      16,   0.,    6553.5,  1,    "1 second"}
+{$(Sys), "$(Dev)T:6Avg-I", $(ASYNPORT)_TC, 10,      16,   0.,    6553.5,  1,    "1 second"}
+{$(Sys), "$(Dev)T:7Avg-I", $(ASYNPORT)_TC, 12,      16,   0.,    6553.5,  1,    "1 second"}
+{$(Sys), "$(Dev)T:8Avg-I", $(ASYNPORT)_TC, 14,      16,   0.,    6553.5,  1,    "1 second"}
+}

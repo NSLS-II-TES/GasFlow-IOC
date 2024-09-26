@@ -1,0 +1,70 @@
+# ##############################################################################
+# DIs in "DI mode" (default: channel 0-5)
+# ##############################################################################
+
+file "$(MODBUS)/db/bi_bit.template" { pattern
+ { P            , R                     , PORT          , OFFSET, ZNAM  , ONAM  , ZSV           , OSV           , SCAN
+}
+ { "$(Sys)"     , "$(Dev)DI:1-Sts"       , $(ASYNPORT)_DI, 0     , Low   , High  , NO_ALARM      , NO_ALARM      , "I/O Intr"
+}
+ { "$(Sys)"     , "$(Dev)DI:2-Sts"       , $(ASYNPORT)_DI, 1     , Low   , High  , NO_ALARM      , NO_ALARM      , "I/O Intr"
+}
+ { "$(Sys)"     , "$(Dev)DI:3-Sts"       , $(ASYNPORT)_DI, 2     , Low   , High  , NO_ALARM      , NO_ALARM      , "I/O Intr"
+}
+ { "$(Sys)"     , "$(Dev)DI:4-Sts"       , $(ASYNPORT)_DI, 3     , Low   , High  , NO_ALARM      , NO_ALARM      , "I/O Intr"
+}
+ { "$(Sys)"     , "$(Dev)DI:5-Sts"       , $(ASYNPORT)_DI, 4     , Low   , High  , NO_ALARM      , NO_ALARM      , "I/O Intr"
+}
+ { "$(Sys)"     , "$(Dev)DI:6-Sts"       , $(ASYNPORT)_DI, 5     , Low   , High  , NO_ALARM      , NO_ALARM      , "I/O Intr"
+}
+}
+
+file "$(MODBUS)/db/statistics.template" { pattern
+ { P            , R             , PORT          , SCAN          }
+ { "$(Sys)"     , "$(Dev)DI_"   , $(ASYNPORT)_DI, "10 second"   }
+}
+
+file "$(MODBUS)/db/poll_delay.template" { pattern
+ { P            , R                     , PORT                  }
+ { "$(Sys)"     , "$(Dev)DI_PollDelay"  , $(ASYNPORT)_DI        }
+}
+
+# ##############################################################################
+# DOs in "DO mode" (default)
+# ##############################################################################
+
+file "$(MODBUS)/db/bo_bit.template" { pattern
+ { P		, R			, PORT			, OFFSET, ZNAM	, ONAM	}
+ { "$(Sys)"	, "$(Dev)DO:1-Cmd"	, $(ASYNPORT)_DO	, 0	, Low	, High	}
+ { "$(Sys)"	, "$(Dev)DO:2-Cmd"	, $(ASYNPORT)_DO	, 1	, Low	, High	}
+ { "$(Sys)"	, "$(Dev)DO:3-Cmd"	, $(ASYNPORT)_DO	, 2	, Low	, High	}
+ { "$(Sys)"     , "$(Dev)DO:4-Cmd"       , $(ASYNPORT)_DO        , 3     , Low   , High  }
+ { "$(Sys)"     , "$(Dev)DO:5-Cmd"       , $(ASYNPORT)_DO        , 4     , Low   , High  }
+ { "$(Sys)"     , "$(Dev)DO:6-Cmd"       , $(ASYNPORT)_DO        , 5     , Low   , High  }
+}
+ 
+file "$(MODBUS)/db/bi_bit.template" { pattern
+ { P		, R			, PORT			, OFFSET, ZNAM	, ONAM	, ZSV		, OSV		, SCAN		}
+ { "$(Sys)"	, "$(Dev)DO:1-Sts"	, $(ASYNPORT)_DO_RBV	, 0	, Low	, High	, NO_ALARM	,  NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DO:2-Sts"	, $(ASYNPORT)_DO_RBV	, 1	, Low	, High	, NO_ALARM	,  NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DO:3-Sts"	, $(ASYNPORT)_DO_RBV	, 2	, Low	, High	, NO_ALARM	,  NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DO:4-Sts"	, $(ASYNPORT)_DO_RBV	, 3	, Low	, High	, NO_ALARM	,  NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DO:5-Sts"	, $(ASYNPORT)_DO_RBV	, 4	, Low	, High	, NO_ALARM	,  NO_ALARM	, "I/O Intr"	}
+ { "$(Sys)"	, "$(Dev)DO:6-Sts"	, $(ASYNPORT)_DO_RBV	, 5	, Low	, High	, NO_ALARM	,  NO_ALARM	, "I/O Intr"	}
+}
+
+file "$(MODBUS)/db/statistics.template" { pattern
+ { P            , R             , PORT          , SCAN          }
+ { "$(Sys)"     , "$(Dev)DO_"   , $(ASYNPORT)_DO, "10 second"   }
+}
+
+file "$(MODBUS)/db/statistics.template" { pattern
+ { P            , R			, PORT			, SCAN          }
+ { "$(Sys)"     , "$(Dev)DO_RBV_"	, $(ASYNPORT)_DO_RBV	, "10 second"   }
+}
+
+file "$(MODBUS)/db/poll_delay.template" { pattern
+ { P            , R                     	, PORT              	    }
+ { "$(Sys)"     , "$(Dev)DO_RBV_PollDelay"	, $(ASYNPORT)_DO_RBV        }
+}
+
